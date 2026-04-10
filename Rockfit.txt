@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>RockFit GOD MODE</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: 'Segoe UI';
+  background: linear-gradient(135deg, #0f2027, #203a43, #2c5364);
+  color: white;
+  overflow-x: hidden;
+}
+
+/* ANIMACIÓN */
+@keyframes fadeIn {
+  from {opacity:0; transform:translateY(20px);}
+  to {opacity:1;}
+}
+
+.section {
+  display: none;
+  padding: 20px;
+  animation: fadeIn 0.5s;
+}
+
+.active {display:block;}
+
+nav {
+  display:flex;
+  justify-content:space-around;
+  background:#000;
+  padding:10px;
+  position:sticky;
+  top:0;
+}
+
+button {
+  background: linear-gradient(90deg,#ff512f,#dd2476);
+  border:none;
+  padding:10px;
+  border-radius:10px;
+  color:white;
+  cursor:pointer;
+}
+
+/* CARDS */
+.card {
+  background: rgba(255,255,255,0.1);
+  padding:20px;
+  margin:15px;
+  border-radius:20px;
+  backdrop-filter: blur(10px);
+}
+
+/* LOGIN */
+#login {
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  flex-direction:column;
+}
+
+/* CHAT */
+#chatbox {
+  height:200px;
+  overflow:auto;
+  background:#000;
+  padding:10px;
+}
+
+/* PROGRESO */
+.bar {
+  height:20px;
+  background:#333;
+  border-radius:10px;
+}
+.fill {
+  height:100%;
+  width:60%;
+  background:linear-gradient(90deg,#00f260,#0575e6);
+}
+</style>
+</head>
+
+<body>
+
+<div id="login">
+<h1>🔥 RockFit GOD</h1>
+<input id="user" placeholder="Usuario">
+<input id="pass" type="password" placeholder="Contraseña">
+<button onclick="login()">Entrar</button>
+</div>
+
+<div id="app" style="display:none">
+
+<nav>
+<button onclick="show('inicio')">Inicio</button>
+<button onclick="show('rutinas')">Rutinas</button>
+<button onclick="show('stats')">Stats</button>
+<button onclick="show('chat')">IA</button>
+<button onclick="show('logros')">Logros</button>
+</nav>
+
+<div id="inicio" class="section active">
+<h2>🔥 Bienvenido a RockFit</h2>
+
+<div class="card">
+<h3>💳 Plan Elite</h3>
+<p>Acceso total + entrenador + IA</p>
+</div>
+
+<div class="card">
+<h3>🎯 Objetivo</h3>
+<p>Subir nivel de fuerza y resistencia</p>
+</div>
+
+</div>
+
+<div id="rutinas" class="section">
+<h2>Rutina PRO</h2>
+<button onclick="rutina()">Generar</button>
+<p id="rut"></p>
+</div>
+
+<div id="stats" class="section">
+<h2>Estadísticas</h2>
+
+<div class="card">
+<p>Fuerza</p>
+<div class="bar"><div class="fill"></div></div>
+</div>
+
+<div class="card">
+<p>Resistencia</p>
+<div class="bar"><div class="fill" style="width:80%"></div></div>
+</div>
+
+</div>
+
+<div id="chat" class="section">
+<h2>IA 24h</h2>
+<div id="chatbox"></div>
+<input id="msg">
+<button onclick="chat()">Enviar</button>
+</div>
+
+<div id="logros" class="section">
+<h2>🏆 Logros</h2>
+<div class="card">Primer entrenamiento ✅</div>
+<div class="card">Nivel medio alcanzado ✅</div>
+<div class="card">10 sesiones completadas ✅</div>
+</div>
+
+</div>
+
+<script>
+function login(){
+  if(user.value==="rockfit" && pass.value==="1234"){
+    login.style.display="none";
+    app.style.display="block";
+  }
+}
+
+function show(s){
+  document.querySelectorAll(".section").forEach(x=>x.classList.remove("active"));
+  document.getElementById(s).classList.add("active");
+}
+
+function rutina(){
+  let r=[
+  "Pecho + espalda + escalada",
+  "Piernas + core + cardio",
+  "Full body + HIIT + escalada"
+  ];
+  rut.innerHTML=r[Math.floor(Math.random()*r.length)];
+}
+
+function chat(){
+  let t=msg.value.toLowerCase();
+  chatbox.innerHTML+="<p>👤 "+t+"</p>";
+
+  if(t.includes("rutina")) chatbox.innerHTML+="<p>🤖 Te recomiendo entrenar fuerza y escalada</p>";
+  else if(t.includes("dolor")) chatbox.innerHTML+="<p>🤖 Descansa y estira</p>";
+  else chatbox.innerHTML+="<p>🤖 Sigue entrenando 💪</p>";
+}
+</script>
+
+</body>
+</html>
